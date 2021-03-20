@@ -1,5 +1,29 @@
 {
+  "name": "ssb-browser-demo",
+  "description": "",
+  "version": "0.0.0",
+  "main": "src/index.js",
   "dependencies": {
     "ssb-browser-core": "^9.2.0"
-  }
+  },
+  "devDependencies": {
+    "browserify": "^17.0.0",
+    "budo": "^11.6.4"
+  },
+  "scripts": {
+    "start": "budo src/index.js:bundle.js --pushstate --dir=public --live --open -- -p esmify --debug",
+    "build": "browserify -p esmify --debug ./src/index.js > public/bundle.js",
+    "build-web": "browserify -p esmify --debug ./web.js > public/bundle.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nichoth/ssb-browser-demo.git"
+  },
+  "author": "Nick Thomas <nichoth@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nichoth/ssb-browser-demo/issues"
+  },
+  "homepage": "https://github.com/nichoth/ssb-browser-demo#readme"
 }
