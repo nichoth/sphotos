@@ -4,16 +4,22 @@
   "version": "0.0.0",
   "main": "src/index.js",
   "dependencies": {
-    "ssb-browser-core": "^9.2.0"
+    "bipf": "^1.4.0",
+    "minisearch": "^3.0.2",
+    "pull-level": "^2.0.4",
+    "pull-stream": "^3.6.14",
+    "ssb-browser-core": "^9.2.0",
+    "ssb-db2": "^1.18.6",
+    "ssb-threads": "^7.0.0"
   },
   "devDependencies": {
     "browserify": "^17.0.0",
-    "budo": "^11.6.4"
+    "budo": "^11.6.4",
+    "esmify": "^2.1.1"
   },
   "scripts": {
     "start": "budo src/index.js:bundle.js --pushstate --dir=public --live --open -- -p esmify --debug",
     "build": "browserify -p esmify --debug ./src/index.js > public/bundle.js",
-    "build-web": "browserify -p esmify --debug ./web.js > public/bundle.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
