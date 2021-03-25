@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "main": "src/index.js",
   "dependencies": {
-    "@nichoth/photos": "^0.0.1",
+    "@nichoth/photos": "^0.0.2",
     "bipf": "^1.4.0",
     "minisearch": "^3.0.2",
     "preact": "^10.5.13",
