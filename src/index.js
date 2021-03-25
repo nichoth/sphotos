@@ -8,16 +8,14 @@ var evs = require('@nichoth/photos/EVENTS')
 ssbSingleton.getSimpleSSBEventually(() => true, function (err, SSB) {
     console.log('aaaaaa', err, SSB)
     console.log('who am i?', SSB.net.id, SSB.net.keys)
-    SSB.net.address((err, res) => {
-        console.log('**addr**', err, res)
-    })
-
-    console.log('**addr2*', SSB.net.address())
 
     var { bus, setRoute, html, state } = photos()
 
+    // # The photos UI
+    // can listen for its events and call fns on SSB
+
     bus.on('*', (evName, data) => {
-        console.log('event', evName, data)
+        console.log('***event', evName, data)
     })
 
     bus.on(evs.route.change, function (route) {
@@ -30,11 +28,8 @@ ssbSingleton.getSimpleSSBEventually(() => true, function (err, SSB) {
 })
 
 ssbSingleton.onError(function (err) {
-    console.log('errrrr', err)
+    console.log('**errrrr', err)
 })
 ssbSingleton.onSuccess(function () {
-    console.log('success', arguments)
+    console.log('**success', arguments)
 })
-
-// # The photos UI
-// can listen for its events and call fns on SSB
