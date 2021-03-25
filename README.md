@@ -20,3 +20,7 @@ npm start
 https://github.com/arj03/ssb-browser-core/issues/43#issuecomment-806189796
 
 Need to have 2 browser processes (2 identities). Then you publish a 'follow' msg for the other.
+
+
+## TODO
+* test replication

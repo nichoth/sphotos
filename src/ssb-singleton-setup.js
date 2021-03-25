@@ -21,7 +21,7 @@ const config = {
   }
 }
 
-function extraModules(secretStack) {
+function extraModules (secretStack) {
   return secretStack.use({
     init: function (sbot, config) {
       sbot.db.registerIndex(require('ssb-db2/indexes/full-mentions'))
@@ -40,7 +40,7 @@ function extraModules(secretStack) {
   .use(require("ssb-threads"))
 }
 
-function ssbLoaded() {
+function ssbLoaded () {
   // add helper methods
   SSB = window.singletonSSB
   require('./net')
@@ -55,4 +55,3 @@ function ssbLoaded() {
 
 require('ssb-browser-core/ssb-singleton').init(config,
     extraModules, ssbLoaded)
-
