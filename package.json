@@ -19,7 +19,10 @@
     "budo": "^11.6.4",
     "concurrently": "^6.0.0",
     "esmify": "^2.1.1",
-    "sass": "^1.32.8"
+    "sass": "^1.32.8",
+    "tap-spec": "^5.0.0",
+    "tape": "^5.2.2",
+    "tape-run": "^8.0.0"
   },
   "scripts": {
     "start": "npm run sass && concurrently --kill-others \"npm run serve\" \"npm run sass-watch\"",
@@ -27,7 +30,7 @@
     "sass": "sass ./src/style/style.scss ./public/style.css",
     "sass-watch": "sass --watch src/style:public",
     "build": "browserify -p esmify --debug ./src/index.js > public/bundle.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "tape test/*.js | tap-spec"
   },
   "repository": {
     "type": "git",
