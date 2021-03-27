@@ -37,4 +37,4 @@ brStream
     })
 .pipe(process.stdout)
  
-browser.end('console.log(location); window.close()');
+// browser.end('console.log(location); window.close()');
