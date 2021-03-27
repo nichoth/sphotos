@@ -6,7 +6,7 @@ var evs = require('@nichoth/photos/EVENTS')
 
 // (isRelevantCB, resultCB)
 ssbSingleton.getSimpleSSBEventually(() => true, function (err, SSB) {
-    console.log('aaaaaa', err, SSB)
+    // console.log('aaaaaa', err, SSB)
     console.log('who am i?', SSB.net.id, SSB.net.keys)
 
     var { bus, setRoute, html, state } = photos()

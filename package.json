@@ -6,6 +6,7 @@
   "dependencies": {
     "@nichoth/photos": "^0.0.2",
     "bipf": "^1.4.0",
+    "browserify": "^17.0.0",
     "minisearch": "^3.0.2",
     "preact": "^10.5.13",
     "pull-level": "^2.0.4",
@@ -15,7 +16,7 @@
     "ssb-threads": "^7.0.0"
   },
   "devDependencies": {
-    "browserify": "^17.0.0",
+    "browser-run": "^8.0.0",
     "budo": "^11.6.4",
     "concurrently": "^6.0.0",
     "esmify": "^2.1.1",
@@ -30,7 +31,9 @@
     "sass": "sass ./src/style/style.scss ./public/style.css",
     "sass-watch": "sass --watch src/style:public",
     "build": "browserify -p esmify --debug ./src/index.js > public/bundle.js",
-    "test": "tape test/*.js | tap-spec"
+    "test": "browserify --debug -p esmify test/index.js | tape-run | tap-spec",
+    "browser": "browserify -p esmify --debug ./test/example-app.js | browser-run",
+    "browser-b": "concurrently --kill-others \"npm run browser\" \"npm test\""
   },
   "repository": {
     "type": "git",
