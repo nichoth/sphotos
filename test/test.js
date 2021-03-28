@@ -1,11 +1,16 @@
 var tapeRun = require('tape-run')
 var browserify = require('browserify')
-var browserRun = require('browser-run');
+var browserRun = require('browser-run')
+var envify = require('envify/custom')
+var through = require('through2')
 
 var browser = browserRun()
     .on('close', () => console.log('browser up here closed'))
 
 var browserifyStream = browserify(__dirname + '/example-app.js', {
+    transform: [
+        envify({ NODE_ENV: 'test' })
+    ],
     plugin: [
         [ require('esmify'), { /* ... options ... */ } ]
     ]
@@ -15,6 +20,20 @@ var browserifyStream = browserify(__dirname + '/example-app.js', {
         console.log('browser closed')
     })
     .pipe(browser)
+    .pipe(through(function (chunk, _, cb) {
+        // console.log('chunk/', chunk.toString(), '/end chunk')
+        var list = chunk.toString().split('\n')
+        list.forEach(function (listItem) {
+            try {
+                var parsed = JSON.parse(listItem)
+                console.log('parsed', parsed)
+            } catch (err) {
+                // noop
+            }
+        })
+
+        cb(null, chunk)
+    }))
 
 
 browserifyStream 
@@ -25,7 +44,7 @@ browserifyStream
             .pipe(tapeRun())
             .on('close', function (signal) {
                 console.log('tape-run close')
-                // browser.end('console.log(location); window.close()')
+                browser.end('console.log(location); window.close()')
                 // browserifyStream.end('console.log(location); window.close()')
                 // browserifyStream.destroy()
                 // browser.destroy()
