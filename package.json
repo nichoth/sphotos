@@ -31,7 +31,8 @@
     "sass": "sass ./src/style/style.scss ./public/style.css",
     "sass-watch": "sass --watch src/style:public",
     "build": "browserify -p esmify --debug ./src/index.js > public/bundle.js",
-    "test": "browserify --debug -p esmify test/index.js | tape-run | tap-spec",
+    "test": "node test/test.js",
+    "//test": "browserify --debug -p esmify test/index.js | tape-run | tap-spec",
     "browser": "browserify -p esmify --debug ./test/example-app.js | browser-run",
     "browser-b": "concurrently --kill-others \"npm run browser\" \"npm test\""
   },
