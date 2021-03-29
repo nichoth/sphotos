@@ -43,24 +43,27 @@ var browserifyStream = browserify(__dirname + '/example-app.js', {
 
 // the tests
 // TODO -- should pass the above browser public key via an env var
-bus
-    .once('publicKey', function ({ pubKey }) {
-        // the first browser has started, now do the tests in `index.js`
-        browserify(__dirname + '/index.js', {
-            transform: [ envify({ PUB_KEY: pubKey }) ]
-        })
-            .bundle()
-            .pipe(tapeRun())
-            .on('close', function (signal) {
-                console.log('tape-run close')
-                browser.end('console.log(location); window.close()')
-                // browserifyStream.end('console.log(location); window.close()')
-                // browserifyStream.destroy()
-                // browser.destroy()
+bus.once('publicKey', function ({ pubKey }) {
+
+    browserifyStream
+        .once('data', function () {
+            // the first browser has started, now do the tests in `index.js`
+            browserify(__dirname + '/index.js', {
+                transform: [ envify({ PUB_KEY: pubKey }) ]
             })
-            // .on('results', console.log)
-            .pipe(process.stdout)
-    })
-.pipe(process.stdout)
+                .bundle()
+                .pipe(tapeRun())
+                .on('close', function (signal) {
+                    console.log('tape-run close')
+                    browser.end('console.log(location); window.close()')
+                    // browserifyStream.end('console.log(location); window.close()')
+                    // browserifyStream.destroy()
+                    // browser.destroy()
+                })
+                // .on('results', console.log)
+                .pipe(process.stdout)
+        })
+    .pipe(process.stdout)
  
 // browser.end('console.log(location); window.close()');
+})
