@@ -29,3 +29,5 @@ npm test
 ### test replication
 * have them both connect to the same room
 * get the public key from each somehow
+
+The test file should follow the example-app file

@@ -3,10 +3,14 @@ var browserify = require('browserify')
 var browserRun = require('browser-run')
 var envify = require('envify/custom')
 var through = require('through2')
+const { EventEmitter } = require('events')
+
+const bus = new EventEmitter()
 
 var browser = browserRun()
     .on('close', () => console.log('browser up here closed'))
 
+// the app
 var browserifyStream = browserify(__dirname + '/example-app.js', {
     transform: [
         envify({ NODE_ENV: 'test' })
@@ -27,6 +31,7 @@ var browserifyStream = browserify(__dirname + '/example-app.js', {
             try {
                 var parsed = JSON.parse(listItem)
                 console.log('parsed', parsed)
+                bus.emit('publicKey', parsed)
             } catch (err) {
                 // noop
             }
@@ -36,10 +41,14 @@ var browserifyStream = browserify(__dirname + '/example-app.js', {
     }))
 
 
-browserifyStream 
-    .once('data', function (ev) {
+// the tests
+// TODO -- should pass the above browser public key via an env var
+bus
+    .once('publicKey', function ({ pubKey }) {
         // the first browser has started, now do the tests in `index.js`
-        browserify(__dirname + '/index.js')
+        browserify(__dirname + '/index.js', {
+            transform: [ envify({ PUB_KEY: pubKey }) ]
+        })
             .bundle()
             .pipe(tapeRun())
             .on('close', function (signal) {
