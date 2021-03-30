@@ -36,3 +36,5 @@ npm test
 * can pass the pub key via env vars
 
 The test file should 'follow' the example-app file
+
+-------------------------------------------

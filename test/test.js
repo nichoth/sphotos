@@ -11,7 +11,7 @@ var browser = browserRun()
     .on('close', () => console.log('browser up here closed'))
 
 // the app
-var browserifyStream = browserify(__dirname + '/../src/index.js', {
+var browserifyStream = browserify(__dirname + '/example-app.js', {
     transform: [
         envify({ NODE_ENV: 'test' })
     ],
@@ -25,12 +25,12 @@ var browserifyStream = browserify(__dirname + '/../src/index.js', {
     })
     .pipe(browser)
     .pipe(through(function (chunk, _, cb) {
-        // console.log('chunk/', chunk.toString(), '/end chunk')
+        console.log('chunk/', chunk.toString(), '/end chunk')
         var list = chunk.toString().split('\n')
         list.forEach(function (listItem) {
             try {
                 var parsed = JSON.parse(listItem)
-                console.log('parsed', parsed)
+                console.log('***********parsed', parsed)
                 bus.emit('publicKey', parsed)
             } catch (err) {
                 // noop
@@ -46,6 +46,7 @@ bus.once('publicKey', function ({ pubKey }) {
 
     browserifyStream
         .once('data', function () {
+            console.log('data')
             // the first browser has started, now do the tests in `index.js`
             browserify(__dirname + '/index.js', {
                 transform: [ envify({ PUB_KEY: pubKey }) ]
