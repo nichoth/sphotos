@@ -1,18 +1,14 @@
-require('./ssb-singleton-setup')
-const ssbSingleton = require('ssb-browser-core/ssb-singleton')
 var photos = require('@nichoth/photos')
 import { render } from 'preact'
 var evs = require('@nichoth/photos/EVENTS')
+var getSSB = require('./start')
 
-// (isRelevantCB, resultCB)
-ssbSingleton.getSimpleSSBEventually(() => true, function (err, SSB) {
-    // console.log('aaaaaa', err, SSB)
+
+getSSB(function (err, SSB) {
     console.log('who am i?', SSB.net.id, SSB.net.keys)
 
+    if (err) return console.log('errrr', err)
     var { bus, setRoute, html, state } = photos()
-
-    // # The photos UI
-    // can listen for its events and call fns on SSB
 
     bus.on('*', (evName, data) => {
         console.log('***event', evName, data)
@@ -22,14 +18,5 @@ ssbSingleton.getSimpleSSBEventually(() => true, function (err, SSB) {
         state.route.set(route)
     })
 
-    // I think we want `.net.connectAndRemember(addr, data)` for pubs
-
     render(html, document.getElementById('content'))
-})
-
-ssbSingleton.onError(function (err) {
-    console.log('**errrrr', err)
-})
-ssbSingleton.onSuccess(function () {
-    console.log('**success', arguments)
 })

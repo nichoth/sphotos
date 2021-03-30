@@ -11,7 +11,7 @@ var browser = browserRun()
     .on('close', () => console.log('browser up here closed'))
 
 // the app
-var browserifyStream = browserify(__dirname + '/example-app.js', {
+var browserifyStream = browserify(__dirname + '/../src/index.js', {
     transform: [
         envify({ NODE_ENV: 'test' })
     ],
@@ -42,7 +42,6 @@ var browserifyStream = browserify(__dirname + '/example-app.js', {
 
 
 // the tests
-// TODO -- should pass the above browser public key via an env var
 bus.once('publicKey', function ({ pubKey }) {
 
     browserifyStream
