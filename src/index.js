@@ -31,6 +31,16 @@ getSSB(function (err, SSB) {
     function submit (ev) {
         ev.preventDefault()
         console.log('submit', ev.target.elements.follow.value)
+        var userId = ev.target.elements.follow.value
+        // in here, publish a follow msg
+
+        SSB.db.publish({
+            type: 'contact',
+            contact: userId,
+            following: true 
+        }, function (err, res) {
+            console.log('publish done', err, res)
+        })
     }
 
     render(html`<div>
