@@ -4,6 +4,9 @@ var evs = require('@nichoth/photos/EVENTS')
 var getSSB = require('./start')
 import { html } from 'htm/preact'
 
+var path = require('path')
+console.log('***path***', path)
+
 getSSB(function (err, SSB) {
     console.log('who am i?', SSB.net.id, SSB.net.keys)
 

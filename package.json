@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "browser-run": "^8.0.0",
-    "budo": "^11.6.4",
+    "budo": "https://github.com/nichoth/budo.git",
     "concurrently": "^6.0.0",
     "envify": "^4.1.0",
     "esmify": "^2.1.1",
