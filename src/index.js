@@ -2,13 +2,15 @@ var photos = require('@nichoth/photos')
 import { render } from 'preact'
 var evs = require('@nichoth/photos/EVENTS')
 var getSSB = require('./start')
-
+import { html } from 'htm/preact'
 
 getSSB(function (err, SSB) {
     console.log('who am i?', SSB.net.id, SSB.net.keys)
 
     if (err) return console.log('errrr', err)
-    var { bus, setRoute, html, state } = photos()
+    var app = photos()
+    var { bus, setRoute, state } = app
+    var el = app.html
 
     bus.on('*', (evName, data) => {
         console.log('***event', evName, data)
@@ -17,6 +19,26 @@ getSSB(function (err, SSB) {
     bus.on(evs.route.change, function (route) {
         state.route.set(route)
     })
+    var addr = 'wss:between-two-worlds.dk:9999~shs:7R5/crt8/icLJNpGwP2D7Oqz2WUd7ObCIinFKVR6kNY='
+    SSB.net.connect(addr, function (err, rpc) {
+        console.log('connect', err, rpc)
+    })
 
-    render(html, document.getElementById('content'))
+    // SSB.net.connectAndRemember(addr, {})
+
+    render(el, document.getElementById('content'))
+
+    function submit (ev) {
+        ev.preventDefault()
+        console.log('submit', ev.target.elements.follow.value)
+    }
+
+    render(html`<div>
+        <form onSubmit=${submit}>
+            <label for="follow">follow</label>
+            <input type="text" id="follow" name="follow" />
+            <button type="submit">submit</button>
+        </form>
+    </div>`, document.getElementById('test'))
+
 })
