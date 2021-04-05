@@ -6,7 +6,7 @@ Trying [ssb browser](https://github.com/arj03/ssb-browser-core)
 npm run build
 ```
 
-## start a local sercer
+## start a local server
 ```
 npm start
 ```
