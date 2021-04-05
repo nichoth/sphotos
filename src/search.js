@@ -1,5 +1,6 @@
 const MiniSearch = require('minisearch').default
-const { and, descending, paginate, type, isPublic, toPullStream } = SSB.dbOperators
+const { and, descending, paginate, type, isPublic,
+  toPullStream } = SSB.dbOperators
 const pull = require('pull-stream')
 const localPrefs = require('./localprefs')
 
