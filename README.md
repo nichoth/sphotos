@@ -1,4 +1,4 @@
-# ssphotos
+# sphotos
 Trying [ssb browser](https://github.com/arj03/ssb-browser-core)
 
 ## build
