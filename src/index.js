@@ -46,12 +46,10 @@ getSSB(function (err, SSB) {
         })
     }
 
-    render(html`<div>
-        <form onSubmit=${submit}>
-            <label for="follow">follow</label>
-            <input type="text" id="follow" name="follow" />
-            <button type="submit">submit</button>
-        </form>
-    </div>`, document.getElementById('test'))
+    render(html`<form onSubmit=${submit}>
+        <label for="follow">follow</label>
+        <input type="text" id="follow" name="follow" />
+        <button type="submit">submit</button>
+    </form>`, document.getElementById('test'))
 
 })

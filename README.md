@@ -1,4 +1,4 @@
-# ssb browser demo
+# ssphotos
 Trying [ssb browser](https://github.com/arj03/ssb-browser-core)
 
 ## build
@@ -10,7 +10,6 @@ npm run build
 ```
 npm start
 ```
-
 
 * https://github.com/arj03/ssb-browser-core
 * https://github.com/arj03/ssb-browser-demo
@@ -38,3 +37,5 @@ npm test
 The test file should 'follow' the example-app file
 
 -------------------------------------------
+
+
