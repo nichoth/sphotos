@@ -1,6 +1,6 @@
 {
-  "name": "ssb-browser-demo",
-  "description": "",
+  "name": "sphotos",
+  "description": "share photos with ssb",
   "version": "0.0.0",
   "main": "src/index.js",
   "dependencies": {
