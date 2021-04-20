@@ -6,7 +6,7 @@ Trying [ssb browser](https://github.com/arj03/ssb-browser-core)
 npm run build
 ```
 
-## start a local server
+## start a local dev server
 ```
 npm start
 ```
@@ -37,5 +37,15 @@ npm test
 The test file should 'follow' the example-app file
 
 -------------------------------------------
+
+* [the hypercore data video](https://hypercore-protocol.org/protocol/)
+
+Only the root of the merkle tree mutates as you append data to the tree.
+
+
+
+
+
+
 
 
