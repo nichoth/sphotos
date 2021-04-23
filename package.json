@@ -4,9 +4,10 @@
   "version": "0.0.0",
   "main": "src/index.js",
   "dependencies": {
-    "@nichoth/photos": "^0.0.2",
+    "@nichoth/photos": "^0.0.4",
     "bipf": "^1.4.0",
     "browserify": "^17.0.0",
+    "htm": "^3.0.4",
     "minisearch": "^3.0.2",
     "preact": "^10.5.13",
     "pull-level": "^2.0.4",

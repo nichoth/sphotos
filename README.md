@@ -1,5 +1,5 @@
 # sphotos
-Trying [ssb browser](https://github.com/arj03/ssb-browser-core)
+a photo sharing application built with [ssb browser](https://github.com/arj03/ssb-browser-core)
 
 ## build
 ```
@@ -38,14 +38,32 @@ The test file should 'follow' the example-app file
 
 -------------------------------------------
 
-* [the hypercore data video](https://hypercore-protocol.org/protocol/)
+[the hypercore data video](https://hypercore-protocol.org/protocol/)
 
 Only the root of the merkle tree mutates as you append data to the tree.
 
+-------------------------------------
+https://github.com/arj03/ssb-browser-core/issues/43
 
 
+> The way I have been testing this in browser demo is to have 2 browsers, could be 2 incognito modes or a chrome and a firefox. Then you basically create a follow messages on one of the browsers for the other identity. Do the same with the other browser. After that if you connect to the same room. You can use the one in browser demo, then the two browsers should start exchanging messages.
 
+> So a room is basically a server that multiple peers can connect to. The room will faciliate e2e encrypted tunnels between the peers. This means that it won't have any trouble with hole punching and all of that stuff. This is an address to a room that works in the browser: https://github.com/arj03/ssb-browser-demo/blob/e935636feaddd6d13868a104a2ea0fdb3c176bff/defaultprefs.json#L12
 
+```js
+    {
+        "name": "Between Two Worlds Room",
+        "type": "room",
+        "address": "wss:between-two-worlds.dk:9999~shs:7R5/crt8/icLJNpGwP2D7Oqz2WUd7ObCIinFKVR6kNY=",
+        "default": false
+    }
+```
 
+```js
+    SSB.net.dhtInvite.start((err, success) => {
+    })
+```
+
+> So you basically connect both clients to that using something like: https://github.com/arj03/ssb-browser-demo/blob/master/ui/connections.js
 
 
