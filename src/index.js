@@ -80,9 +80,19 @@ getSSB(function (err, SSB) {
 
     // SSB.net.connectAndRemember(addr, {})
 
-    // render(el, document.getElementById('content'))
 
-    render(html`<${photosComponent} />`, document.getElementById('content'))
+    function testEl () {
+        return html`<form onSubmit=${submit}>
+            <label for="follow">follow</label>
+            <input type="text" id="follow" name="follow" />
+            <button type="submit">submit</button>
+        </form>`
+    }
+
+    render(html`<${photosComponent}>
+        <p>woooooo</p>
+        <${testEl} />
+    </{photosComponent}>`, document.getElementById('content'))
 
     function submit (ev) {
         ev.preventDefault()
@@ -102,16 +112,11 @@ getSSB(function (err, SSB) {
         })
     }
 
-    render(html`<form onSubmit=${submit}>
-        <label for="follow">follow</label>
-        <input type="text" id="follow" name="follow" />
-        <button type="submit">submit</button>
-    </form>`, document.getElementById('test'))
 })
 
 function subscribe (bus, SSB, state) {
     bus.on('*', (evName, data) => {
-        console.log('***event', evName, data)
+        console.log('*** event', evName, data)
     })
 
     bus.on(evs.route.change, function (route) {
